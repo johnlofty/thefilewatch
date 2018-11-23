@@ -1,9 +1,11 @@
 import pyinotify
+import logging
 import sys
 import os
 
 mask = pyinotify.IN_MODIFY
 
+logger = logging.getLogger('filewatch')
 
 class BaseWatchHandler:
 
@@ -34,7 +36,6 @@ class Tailer:
 
     def process(self):
         now_size = os.path.getsize(self.file_path)
-        # print('now size {} last_size {}'.format(now_size, self.file_size))
         if now_size < self.file_size:
             while self.try_count < 10:
                 if not self.reload():
@@ -50,13 +51,14 @@ class Tailer:
             self.file_size = now_size
 
         curr_position = self.file.tell()
-        # print('curr_position ', curr_position)
         lines = self.file.readlines()
-        # print('raw lines ', lines)
         if not lines:
             self.file.seek(curr_position)
         else:
-            self.handler.process(lines)
+            try:
+                self.handler.process(lines)
+            except Exception as e:
+                logger.exception(e)
 
 
 class EventHandler(pyinotify.ProcessEvent):
