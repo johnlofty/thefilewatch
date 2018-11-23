@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='thefilewatch',
-    version='0.0.5',
+    version='0.0.6',
     author='johnlofty',
     author_email='johnlofty@163.com',
     url='https://github.com/johnlofty/thefilewatch',

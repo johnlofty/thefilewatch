@@ -5,7 +5,7 @@ import os
 
 mask = pyinotify.IN_MODIFY
 
-logger = logging.getLogger('filewatch')
+LOG = logging.getLogger('thefilewatch')
 
 class BaseWatchHandler:
 
@@ -24,14 +24,14 @@ class Tailer:
 
     def reload(self):
         try:
-            print('reloading ...')
+            LOG.info('reloading file %s ...', self.file_path)
             self.file.close()
             self.file = open(self.file_path, 'r')
             self.file_size = os.path.getsize(self.file_path)
             self.file.seek(0, 2)
             return True
         except Exception as e:
-            print('exception ', e)
+            LOG.exception(e)
             return False
 
     def process(self):
@@ -45,6 +45,7 @@ class Tailer:
                     break
 
             if self.try_count >= 10:
+                LOG.error('Open %s failed after try 10 times' % self.file_path)
                 raise Exception('Open %s failed after try 10 times' % self.file_path)
 
         else:
@@ -74,7 +75,7 @@ class EventHandler(pyinotify.ProcessEvent):
     def process_IN_MODIFY(self, event):
         file_path = event.pathname
         if file_path not in self.file_map:
-            print('not found')
+            LOG.error('file path %s not found in file_map', file_path)
             return
 
         tailer = self.file_map[file_path]
@@ -113,7 +114,7 @@ class FileWatch:
             raise TailError("File '%s' is a directory" % (file_))
 
     def start(self):
-        print('my watch begin ...')
+        LOG.info('Night gathers, and now my watch begins.')
         self.notifier.loop()
 
 
