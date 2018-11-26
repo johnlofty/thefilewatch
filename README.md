@@ -1,4 +1,5 @@
 ## *the file watch*
+[![Downloads](https://pepy.tech/badge/thefilewatch)](https://pepy.tech/project/thefilewatch)
 
 * capable to watch multi files at the same time. 
 * base on pyinotify
