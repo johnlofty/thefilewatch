@@ -35,3 +35,7 @@ if __name__ == '__main__':
 start watching files
 
 <code>$ python -m thefilewatch.file_watch a.txt b.txt</code>
+
+## examples
+
+see more specific examples in handler
