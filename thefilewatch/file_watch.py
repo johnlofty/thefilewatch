@@ -123,7 +123,13 @@ if __name__ == '__main__':
     class PrintHandler(BaseWatchHandler):
 
         def process(self, content):
-            print('getting content ', content)
+            print('getting content')
+            if isinstance(content, list):
+                for ele in content:
+                    print ele
+
+            else:
+                print(content)
 
 
     if len(sys.argv) < 2:
