@@ -119,18 +119,18 @@ class FileWatch:
 
 
 if __name__ == '__main__':
-
+    import sys
     class PrintHandler(BaseWatchHandler):
 
         def process(self, content):
-            print('getting content')
             if isinstance(content, list):
                 for ele in content:
-                    print ele
+                    sys.stdout.write(ele)
 
             else:
-                print(content)
+                sys.stdout.write(content)
 
+            sys.stdout.flush()
 
     if len(sys.argv) < 2:
         print('need watch files')
@@ -139,4 +139,5 @@ if __name__ == '__main__':
         file_list = sys.argv[1:]
 
     watcher = FileWatch(file_list, PrintHandler())
+    print('start watch ...')
     watcher.start()
