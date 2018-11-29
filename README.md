@@ -10,7 +10,12 @@
 ## install
 <code>$ pip install thefilewatch</code>
 
-## how to use
+## quick use
+
+<code>$ python -m thefilewatch.file_watch a.txt b.txt</code>
+
+
+## simple example
 
 ```python
 import sys
@@ -37,6 +42,6 @@ start watching files
 
 <code>$ python -m thefilewatch.file_watch a.txt b.txt</code>
 
-## examples
+## more examples
 
-see more specific examples in handler
+see more specific examples in handlers folder.
