@@ -1,5 +1,7 @@
 ## *the file watch*
 [![Downloads](https://pepy.tech/badge/thefilewatch)](https://pepy.tech/project/thefilewatch)
+[![996.ICU](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) 
+
 
 * capable to watch multi files at the same time. 
 * base on pyinotify
